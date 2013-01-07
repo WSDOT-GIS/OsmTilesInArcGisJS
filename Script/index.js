@@ -1,9 +1,9 @@
 ﻿/*global require, esri*/
 /*jslint browser:true*/
-require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "dojo/domReady!"], function (on, query) {
+require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri/layers/osm", "dojo/domReady!"], function (on, query) {
 	"use strict";
 
-	var map, mqLayer, oaLayer, changeLayers;
+	var map, mqLayer, oaLayer, osmLayer, changeLayers;
 
 	map = new esri.Map("map");
 
@@ -33,6 +33,11 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "dojo
 				"subDomains": mqSubDomains,
 				"copyright": 'Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">'
 			});
+		} else if (type === "osm") {
+			layer = new esri.layers.OpenStreetMapLayer({
+				id: id,
+				displayLevels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+			});
 		}
 		
 		return layer;
@@ -40,7 +45,14 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "dojo
 
 	changeLayers = function () {
 		/// <summary>Changes the layers when a radio button is clicked.</summary>
-		if (this.value === "map") {
+		var type;
+		if (!this) {
+			type = "osm";
+		} else {
+			type = this.value;
+		}
+
+		if (type === "map") {
 			if (!mqLayer) {
 				mqLayer = createLayer("mapQuest", "map", "png");
 				map.addLayer(mqLayer);
@@ -49,12 +61,30 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "dojo
 			if (oaLayer) {
 				oaLayer.hide();
 			}
-		} else if (this.value === "sat") {
+			if (osmLayer) {
+				osmLayer.hide();
+			}
+		} else if (type === "sat") {
 			if (!oaLayer) {
 				oaLayer = createLayer("openAerial", "sat", "png");
 				map.addLayer(oaLayer);
 			}
 			oaLayer.show();
+			if (mqLayer) {
+				mqLayer.hide();
+			}
+			if (osmLayer) {
+				osmLayer.hide();
+			}
+		} else if (type === "osm") {
+			if (!osmLayer) {
+				osmLayer = createLayer("osm", "osm");
+				map.addLayer(osmLayer);
+			}
+			osmLayer.show();
+			if (oaLayer) {
+				oaLayer.hide();
+			}
 			if (mqLayer) {
 				mqLayer.hide();
 			}
@@ -67,10 +97,7 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "dojo
 		map.resize();
 	});
 
-	mqLayer = createLayer("mapQuest");
-
-
-	map.addLayer(mqLayer);
+	changeLayers();
 
 	// Attach event handler code to radio button inputs.
 	on(query("#tools > input[type=radio]"), "click", changeLayers);
