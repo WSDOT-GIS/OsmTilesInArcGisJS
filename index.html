@@ -7,10 +7,22 @@
 	
 	<style>
 		html, body, #map, map.container { height: 100%; margin: 0; padding: 0; }
+		#tools {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 30;
+			padding: 0.5em;
+		}
 	</style>
 </head>
 <body>
 	<div id="map"></div>
+	<div id="tools">
+		<input id="mqmap" name="layer" type="radio" checked="checked" value="map" /><label for="mqmap">MapQuest <abbr title="OpenStreetMap">OSM</abbr></label>
+		<input id="mqoa" name="layer" type="radio" value="sat" /><label for="mqoa">MapQuest Open Aerial Tiles</label>
+		<input id="osm" name="layer" type="radio" value="osm" /><label for="osm">OpenStreetMap</label>
+	</div>
 	<script src="Script/index.js"></script>
 </body>
 </html>
