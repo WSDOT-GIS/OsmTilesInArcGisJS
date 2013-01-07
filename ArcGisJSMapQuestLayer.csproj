@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="License.txt" />
     <Content Include="Script\index.js" />
     <Content Include="Web.config" />
   </ItemGroup>
