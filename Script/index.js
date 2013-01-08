@@ -13,8 +13,9 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri
 		/// <param name="type" type="String">The type of tiles "map" (OSM) or "sat" (Open Aerial). (Optional.  Defaults to "map".)</param>
 		/// <param name="ext" type="String">The image file extension: "png" or "jpg". (Optional. Defaults to "png").</param>
 		/// <returns type="esri.layers.WebTiledLayer" />
-		var layer, mqSubDomains;
+		var layer, mqSubDomains, osmSubDomains;
 		mqSubDomains = ["otile1", "otile2", "otile3", "otile4"];
+		osmSubDomains = ["a", "b", "c"];
 		if (!type) {
 			type = "map";
 		}
@@ -33,7 +34,18 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri
 				"subDomains": mqSubDomains,
 				"copyright": 'Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">'
 			});
+		} else if (type === "cycle") {
+			layer = new esri.layers.WebTiledLayer("http://${subDomain}.tile.opencyclemap.org/cycle/${level}/${col}/${row}.png", {
+				id: id,
+				subDomains: osmSubDomains,
+				copyright: '© OpenStreetMap contributors'
+			});
 		} else if (type === "osm") {
+			////layer = new esri.layers.WebTiledLayer("http://${subDomain}.tile.openstreetmap.org/${level}/${col}/${row}." + ext, {
+			////	"id": id,
+			////	"subDomains": osmSubDomains,
+			////	"copyright": '© OpenStreetMap contributors'
+			////});
 			layer = new esri.layers.OpenStreetMapLayer({
 				id: id,
 				displayLevels: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
