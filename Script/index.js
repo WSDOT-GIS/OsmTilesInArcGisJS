@@ -40,7 +40,20 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri
 				subDomains: osmSubDomains,
 				copyright: '© OpenStreetMap contributors'
 			});
+		} else if (type === "ocmTransport") {
+			layer = new esri.layers.WebTiledLayer("http://${subDomain}.tile2.opencyclemap.org/transport/${level}/${col}/${row}.png", {
+				id: "ocmTransport",
+				subDomains: osmSubDomains,
+				copyright: '© OpenStreetMap contributors'
+			});
+		} else if (type === "ocmLandscape") {
+			layer = new esri.layers.WebTiledLayer("http://${subDomain}.tile3.opencyclemap.org/landscape/${level}/${col}/${row}.png", {
+				id: "ocmLandscape",
+				subDomains: osmSubDomains,
+				copyright: '© OpenStreetMap contributors'
+			});
 		} else if (type === "openStreetMap") {
+			// The Esri JS API already has an OpenStreetMapLayer type, so we don't need to specify a custom WebTiledLayer.
 			////layer = new esri.layers.WebTiledLayer("http://${subDomain}.tile.openstreetmap.org/${level}/${col}/${row}." + ext, {
 			////	"id": id,
 			////	"subDomains": osmSubDomains,
@@ -97,7 +110,6 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri
 	};
 
 	// Resize the map when the browser window resizes.
-	// dojo.connect(window, 'resize', map, map.resize);
 	on(window, "resize", function () {
 		map.resize();
 	});
