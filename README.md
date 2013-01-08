@@ -1,4 +1,7 @@
-﻿WebTiledLayer demo
-==================
+﻿OpenStreetMap Layers demo
+=========================
 
-This project demonstrates how to consume various free web map sources using the esri.layer.WebTiledLayer class in the ArcGIS API for JavaScript.
+This project demonstrates how to consume various [OpenStreetMap] based map sources using the [ArcGIS API for JavaScript].
+
+[OpenStreetMap]:(http://openstreetmap.org)
+[ArcGIS API for JavaScript]:(http://links.esri.com/javascript)
