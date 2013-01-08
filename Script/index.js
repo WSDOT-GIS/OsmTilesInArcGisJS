@@ -89,7 +89,7 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri
 		/// <summary>Changes the layers when a radio button is clicked.</summary>
 		var id, layer;
 		if (!this) {
-			id = query("#tools > input:checked")[0].value;  //"mapQuestOsm";
+			id = query("#tools > input:checked")[0].value;
 		} else {
 			id = this.value;
 		}
