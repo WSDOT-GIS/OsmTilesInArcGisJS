@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>OSM Tiles in ArcGIS JS</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+		<nature>com.aptana.projects.webnature</nature>
+	</natures>
+	<filteredResources>
+		<filter>
+			<id>1357759784428</id>
+			<name></name>
+			<type>6</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-true-.+\.((csproj)|(sln)|(config))$</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
+</projectDescription>
