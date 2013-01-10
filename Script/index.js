@@ -119,11 +119,6 @@ require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri
 		}
 	};
 
-	// Resize the map when the browser window resizes.
-	on(window, "resize", function () {
-		map.resize();
-	});
-
 	changeLayers();
 
 	// Attach event handler code to radio button inputs.
