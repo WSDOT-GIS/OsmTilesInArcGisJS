@@ -4,9 +4,19 @@
 require(["dojo/on", "dojo/query", "esri/map", "esri/layers/WebTiledLayer", "esri/layers/osm", "dojo/domReady!"], function (on, query) {
 	"use strict";
 
-	var map, changeLayers;
+	var map, changeLayers, progress;
+	
+	progress = query("#progress")[0];
 
 	map = new esri.Map("map");
+	
+	dojo.connect(map, "onUpdateStart", function() {
+		esri.show(progress);
+	});
+	
+	dojo.connect(map, "onUpdateEnd", function() {
+		esri.hide(progress);
+	});
 
 	function createLayer(type, ext) {
 		/// <summary>Creates an esri.layers.WebTiledLayer using MapQuest open tiles.</summary>
