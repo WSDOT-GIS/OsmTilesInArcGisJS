@@ -7,19 +7,36 @@
 	
 	<style>
 		html, body, #map, map.container { height: 100%; margin: 0; padding: 0; }
+		progress { 
+			z-index: 30;
+			position: absolute;
+			bottom: 0;
+		}
 		#tools {
 			position: absolute;
 			top: 0;
 			right: 0;
 			z-index: 30;
 			padding: 0.5em;
-			background-color: rgba(254, 254, 254, 0.5);
-			color: rgba(2, 2, 2, 0.5);
+			margin-top: 0.1em;
+			margin-right: 0.1em;
+			border-radius: 5px;
+			 
+			background-color: rgba(254, 254, 254, 0.3);
+			color: rgba(2, 2, 2, 0.3);
+			border-style: solid;
+			border-color: rgba(2,2,2, 0.3);
+		}
+		#tools:hover {
+			background-color: rgba(254, 254, 254, 1);
+			color: rgba(2, 2, 2, 1);
+			border-color: rgba(2,2,2, 1);
 		}
 	</style>
 </head>
 <body>
-	<div id="map"></div>
+	<div id="map"><!-- map will go here --></div>
+	<progress id="progress" hidden="hidden">Loading data...</progress>
 	<div id="tools">
 		<input id="mqmap" name="layer" type="radio" value="mapQuestOsm" checked="checked" /><label for="mqmap">MapQuest <abbr title="OpenStreetMap">OSM</abbr></label>
 		<input id="mqoa" name="layer" type="radio" value="mapQuestOpenAerial" /><label for="mqoa">MapQuest Open Aerial Tiles</label>
